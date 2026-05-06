@@ -1,0 +1,21 @@
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\bin\Debug\net9.0-windows\Hospital System Lab 2.exe
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\bin\Debug\net9.0-windows\Hospital System Lab 2.deps.json
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\bin\Debug\net9.0-windows\Hospital System Lab 2.runtimeconfig.json
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\bin\Debug\net9.0-windows\Hospital System Lab 2.dll
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\bin\Debug\net9.0-windows\Hospital System Lab 2.pdb
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital_System_Lab_2.Form1.resources
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital System Lab 2.csproj.GenerateResource.cache
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital System Lab 2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital System Lab 2.AssemblyInfoInputs.cache
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital System Lab 2.AssemblyInfo.cs
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital System Lab 2.csproj.CoreCompileInputs.cache
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital System Lab 2.dll
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\refint\Hospital System Lab 2.dll
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital System Lab 2.pdb
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital System Lab 2.genruntimeconfig.cache
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\ref\Hospital System Lab 2.dll
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\bin\Debug\net9.0-windows\MaterialSkin.dll
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital System Lab 2.csproj.AssemblyReference.cache
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital_System_Lab_2.MainForm.resources
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital.BEE958D9.Up2Date
+C:\Users\Asus\source\repos\Hospital System Lab 2\Hospital System Lab 2\obj\Debug\net9.0-windows\Hospital_System_Lab_2.Properties.Resources.resources
