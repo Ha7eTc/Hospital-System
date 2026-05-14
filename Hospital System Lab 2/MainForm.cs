@@ -37,7 +37,7 @@ namespace Hospital_System_Lab_2
             textBox1 = new TextBox();
             label1 = new Label();
             textBox2 = new TextBox();
-            add = new Button();
+            add_button = new Button();
             textBox3 = new TextBox();
             label2 = new Label();
             textBox4 = new TextBox();
@@ -118,17 +118,17 @@ namespace Hospital_System_Lab_2
             textBox2.Size = new Size(0, 27);
             textBox2.TabIndex = 3;
             // 
-            // add
+            // add_button
             // 
-            add.BackColor = SystemColors.ActiveCaption;
-            add.BackgroundImageLayout = ImageLayout.None;
-            add.Location = new Point(1120, 618);
-            add.Name = "add";
-            add.Size = new Size(94, 46);
-            add.TabIndex = 4;
-            add.Text = "ADD";
-            add.UseVisualStyleBackColor = false;
-            add.Click += add_Click;
+            add_button.BackColor = SystemColors.ActiveCaption;
+            add_button.BackgroundImageLayout = ImageLayout.None;
+            add_button.Location = new Point(1120, 618);
+            add_button.Name = "add_button";
+            add_button.Size = new Size(94, 46);
+            add_button.TabIndex = 4;
+            add_button.Text = "ADD";
+            add_button.UseVisualStyleBackColor = false;
+            add_button.Click += Add_Button;
             // 
             // textBox3
             // 
@@ -193,6 +193,7 @@ namespace Hospital_System_Lab_2
             SearchClickButton.TabIndex = 12;
             SearchClickButton.Text = "lets go";
             SearchClickButton.UseVisualStyleBackColor = false;
+            SearchClickButton.Click += SearchButtonClick;
             // 
             // MainForm
             // 
@@ -204,7 +205,7 @@ namespace Hospital_System_Lab_2
             Controls.Add(textBox4);
             Controls.Add(label2);
             Controls.Add(textBox3);
-            Controls.Add(add);
+            Controls.Add(add_button);
             Controls.Add(textBox2);
             Controls.Add(label1);
             Controls.Add(textBox1);
@@ -242,9 +243,9 @@ namespace Hospital_System_Lab_2
         {
 
         }
-        private Button add;
+        private Button add_button;
 
-        private void add_Click(object sender, EventArgs e)
+        private void Add_Button(object sender, EventArgs e)
         {
             try
             {
@@ -267,6 +268,7 @@ namespace Hospital_System_Lab_2
                 );
 
                 FileManager.Add(hospital);
+                DataManager.Add( hospital );
 
                 var item = new ListViewItem((MainListView.Items.Count + 1).ToString());
 
@@ -328,7 +330,7 @@ namespace Hospital_System_Lab_2
                     // Інакше — виконуємо пошук по списку концертів
                     // DataManager шукає елементи у списку DataManager.Entities,
                     // до якого ми додавали елементи у обробнику addRecordBtn_Click
-                    foundEntities = DataManager.Search(MainListView.Text);
+                    foundEntities = DataManager.Search(SearchListView.Text);
                 }
 
                 foreach (IEntity entity in foundEntities)
@@ -359,37 +361,5 @@ namespace Hospital_System_Lab_2
             }
         }
 
-
-        private void addRecordBtn_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var name = textBox1.Text;
-                var address = textBox3.Text;
-
-                var id = Guid.NewGuid();
-                var concert = new Hospital(id, name, address, textBox4.Text, new List<Doctor>, new List<Patient>(), new List<Nurse>());
-
-                // Записати у файл за допомогою методу WriteToFile класу FileManager
-                FileManager.WriteToFile(Hospital);
-
-                // Додати до колекції для подальшої роботи з даними за допомогою методу Add класу DataManager
-                DataManager.Add(concert);
-
-                var item = new ListViewItem(concertListView.Items.Count + 1 + "");
-                item.SubItems.Add(name);
-                item.SubItems.Add(descriptionTextBox.Text);
-                item.SubItems.Add(durationTextBox.Text);
-                item.SubItems.Add(startDateTime.ToString("dd/MM/yyyy hh:mm tt"));
-                item.SubItems.Add("0");
-                item.SubItems.Add("0");
-
-                concertListView.Items.Add(item);
-            }
-            catch (Exception ex)
-            {
-                MaterialMessageBox.Show(ex.Message);
-            }
-        }
     }
 }
