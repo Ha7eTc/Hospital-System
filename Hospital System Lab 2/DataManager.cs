@@ -24,5 +24,16 @@ namespace Hospital_System_Lab_2
                 }
             }
         }
+
+        public static IEnumerable<IEntity> Filter(FilterDelegate filter)
+        {
+            foreach (var entity in Entities)
+            {
+                if (filter.Invoke(entity))
+                {
+                    yield return entity;
+                }
+            }
+        }
     }
 }

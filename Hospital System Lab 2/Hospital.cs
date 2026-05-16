@@ -14,6 +14,7 @@ namespace Hospital_System_Lab_2
         public string? Name { get; set; }
         public string? Address { get; set; }
         public string? Description { get; set; }
+        public TimeSpan? DurationOfWork { get; set; }
         public List<Doctor>? Doctors { get; set; }
         public List<Patient>? Patients { get; set; }
         public List<Nurse>? Nurses { get; set; }
@@ -23,16 +24,18 @@ namespace Hospital_System_Lab_2
             Name = string.Empty;
             Address = string.Empty;
             Description = string.Empty;
+            DurationOfWork = TimeSpan.Zero;
             Doctors = new List<Doctor>();
             Patients = new List<Patient>();
             Nurses = new List<Nurse>();
         }
-        public Hospital(Guid id, string name, string address, string description, List<Doctor> doctors, List<Patient> patients, List<Nurse> nurses = null)
+        public Hospital(Guid id, string name, string address, string description,TimeSpan durationOfWork, List<Doctor> doctors, List<Patient> patients, List<Nurse> nurses = null)
             : base(id)
         {
             this.Name = name;
             this.Address = address;
             this.Description = description;
+            this.DurationOfWork = durationOfWork;
             this.Doctors = doctors;
             this.Patients = patients;
             this.Nurses = nurses;
@@ -41,8 +44,7 @@ namespace Hospital_System_Lab_2
         public new bool IsValid()
         {
             return base.IsValid() && !string.IsNullOrEmpty(Name) && !string.IsNullOrEmpty(Address) && !string.IsNullOrEmpty(Description)
-                && Doctors?.Count > 0
-                && Patients?.Count > 0 && Nurses?.Count > 0;
+                && DurationOfWork != null && Doctors?.Count > 0 && Patients?.Count > 0 && Nurses?.Count > 0;
         }
 
         public override string Format()
@@ -65,7 +67,7 @@ namespace Hospital_System_Lab_2
             var DoctorsIdStr = string.Join(", ", DoctorsId);
             var PatientsIdStr = string.Join(", ", PatientsId);
             var NursesIdStr = string.Join(", ", NursesId);
-            return $"{base.Format()}[{Name}][{Address}][{Description}][{DoctorsIdStr}][{PatientsIdStr}][{NursesIdStr}]";
+            return $"{base.Format()}[{Name}][{Address}][{Description}][{DurationOfWork}][{DoctorsIdStr}][{PatientsIdStr}][{NursesIdStr}]";
         }
 
         public virtual void Parse(string record)
@@ -80,15 +82,20 @@ namespace Hospital_System_Lab_2
             var parts = record.Trim('[', ']').Split(new[] { "][" }, StringSplitOptions.None);
 
             // 3. Перевірка формату (мінімум 2 поля)
-            if (parts.Length < 3)
+            if (parts.Length < 4)
             {
-                throw new FormatException("Invalid hospital record format. Expected [Name][Address][Description].");
+                throw new FormatException("Invalid hospital record format. Expected [Name][Address][Description][DurationOfWork].");
             }
 
             // 4. Присвоєння значень
             Name = parts[0];
             Address = parts[1];
             Description = parts[2];
+
+            if (TimeSpan.TryParse(parts[3], out TimeSpan duration))
+                DurationOfWork = duration;
+            else
+                throw new FormatException($"Invalid DurationOfWork format: '{parts[3]}'. Expected hh:mm:ss.");
 
             // 5. Очищуємо списки перед новим заповненням (опціонально)
             Doctors?.Clear();

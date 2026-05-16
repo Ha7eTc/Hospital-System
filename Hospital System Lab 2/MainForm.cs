@@ -31,6 +31,7 @@ namespace Hospital_System_Lab_2
             columnHeader1 = new ColumnHeader();
             columnHeader7 = new ColumnHeader();
             columnHeader3 = new ColumnHeader();
+            columnHeader8 = new ColumnHeader();
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             columnHeader6 = new ColumnHeader();
@@ -45,11 +46,20 @@ namespace Hospital_System_Lab_2
             SearchListView = new TextBox();
             label4 = new Label();
             SearchClickButton = new Button();
+            label5 = new Label();
+            label6 = new Label();
+            label7 = new Label();
+            label8 = new Label();
+            durationFromTextBox = new TextBox();
+            durationToTextBox = new TextBox();
+            textBox7 = new TextBox();
+            label9 = new Label();
+            filterButton = new Button();
             SuspendLayout();
             // 
             // MainListView
             // 
-            MainListView.Columns.AddRange(new ColumnHeader[] { columnHeader2, columnHeader1, columnHeader7, columnHeader3, columnHeader4, columnHeader5, columnHeader6 });
+            MainListView.Columns.AddRange(new ColumnHeader[] { columnHeader2, columnHeader1, columnHeader7, columnHeader3, columnHeader8, columnHeader4, columnHeader5, columnHeader6 });
             MainListView.Location = new Point(54, 181);
             MainListView.Name = "MainListView";
             MainListView.Size = new Size(1028, 526);
@@ -75,6 +85,11 @@ namespace Hospital_System_Lab_2
             // 
             columnHeader3.Text = "Address";
             columnHeader3.Width = 150;
+            // 
+            // columnHeader8
+            // 
+            columnHeader8.Text = "Hospital operation hours";
+            columnHeader8.Width = 200;
             // 
             // columnHeader4
             // 
@@ -122,7 +137,7 @@ namespace Hospital_System_Lab_2
             // 
             add_button.BackColor = SystemColors.ActiveCaption;
             add_button.BackgroundImageLayout = ImageLayout.None;
-            add_button.Location = new Point(1120, 618);
+            add_button.Location = new Point(1120, 661);
             add_button.Name = "add_button";
             add_button.Size = new Size(94, 46);
             add_button.TabIndex = 4;
@@ -132,7 +147,7 @@ namespace Hospital_System_Lab_2
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(1120, 506);
+            textBox3.Location = new Point(1120, 589);
             textBox3.Multiline = true;
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(233, 66);
@@ -142,7 +157,7 @@ namespace Hospital_System_Lab_2
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(1120, 483);
+            label2.Location = new Point(1120, 566);
             label2.MaximumSize = new Size(100, 100);
             label2.Name = "label2";
             label2.Size = new Size(62, 20);
@@ -155,7 +170,7 @@ namespace Hospital_System_Lab_2
             textBox4.Location = new Point(1120, 313);
             textBox4.Multiline = true;
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(233, 139);
+            textBox4.Size = new Size(233, 114);
             textBox4.TabIndex = 7;
             // 
             // label3
@@ -191,13 +206,102 @@ namespace Hospital_System_Lab_2
             SearchClickButton.Name = "SearchClickButton";
             SearchClickButton.Size = new Size(71, 49);
             SearchClickButton.TabIndex = 12;
-            SearchClickButton.Text = "lets go";
+            SearchClickButton.Text = "search";
             SearchClickButton.UseVisualStyleBackColor = false;
             SearchClickButton.Click += SearchButtonClick;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(578, 65);
+            label5.Name = "label5";
+            label5.Size = new Size(174, 20);
+            label5.TabIndex = 13;
+            label5.Text = "Hospital operation hours";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(579, 96);
+            label6.Name = "label6";
+            label6.Size = new Size(43, 20);
+            label6.TabIndex = 14;
+            label6.Text = "From";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(725, 96);
+            label7.Name = "label7";
+            label7.Size = new Size(25, 20);
+            label7.TabIndex = 15;
+            label7.Text = "To";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(704, 133);
+            label8.Name = "label8";
+            label8.Size = new Size(15, 20);
+            label8.TabIndex = 16;
+            label8.Text = "-";
+            // 
+            // durationFromTextBox
+            // 
+            durationFromTextBox.Location = new Point(579, 119);
+            durationFromTextBox.Multiline = true;
+            durationFromTextBox.Name = "durationFromTextBox";
+            durationFromTextBox.Size = new Size(110, 49);
+            durationFromTextBox.TabIndex = 17;
+            // 
+            // durationToTextBox
+            // 
+            durationToTextBox.Location = new Point(725, 119);
+            durationToTextBox.Multiline = true;
+            durationToTextBox.Name = "durationToTextBox";
+            durationToTextBox.Size = new Size(125, 48);
+            durationToTextBox.TabIndex = 18;
+            // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(1120, 477);
+            textBox7.Multiline = true;
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(233, 66);
+            textBox7.TabIndex = 19;
+            // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Location = new Point(1120, 454);
+            label9.Name = "label9";
+            label9.Size = new Size(174, 20);
+            label9.TabIndex = 20;
+            label9.Text = "Hospital operation hours";
+            // 
+            // filterButton
+            // 
+            filterButton.BackColor = SystemColors.ActiveCaption;
+            filterButton.Location = new Point(870, 119);
+            filterButton.Name = "filterButton";
+            filterButton.Size = new Size(73, 48);
+            filterButton.TabIndex = 21;
+            filterButton.Text = "search";
+            filterButton.UseVisualStyleBackColor = false;
+            filterButton.Click += filterButton_Click;
             // 
             // MainForm
             // 
             ClientSize = new Size(1396, 761);
+            Controls.Add(filterButton);
+            Controls.Add(label9);
+            Controls.Add(textBox7);
+            Controls.Add(durationToTextBox);
+            Controls.Add(durationFromTextBox);
+            Controls.Add(label8);
+            Controls.Add(label7);
+            Controls.Add(label6);
+            Controls.Add(label5);
             Controls.Add(SearchClickButton);
             Controls.Add(label4);
             Controls.Add(SearchListView);
@@ -255,6 +359,10 @@ namespace Hospital_System_Lab_2
 
                 var discription = textBox4.Text;
 
+                TimeSpan durationOfWork = TimeSpan.Zero;
+                if (TimeSpan.TryParse(textBox7.Text, out var durationResult))
+                    durationOfWork = durationResult;
+
                 var id = Guid.NewGuid();
 
                 var hospital = new Hospital(
@@ -262,19 +370,21 @@ namespace Hospital_System_Lab_2
                     name,
                     address,
                     discription,
+                    durationOfWork,
                     new List<Doctor>(),
                     new List<Patient>(),
                     new List<Nurse>()
                 );
 
                 FileManager.Add(hospital);
-                DataManager.Add( hospital );
+                DataManager.Add(hospital);
 
                 var item = new ListViewItem((MainListView.Items.Count + 1).ToString());
 
                 item.SubItems.Add(name);
                 item.SubItems.Add(discription);
                 item.SubItems.Add(address);
+                item.SubItems.Add(textBox7.Text);
 
                 item.SubItems.Add(hospital.Doctors.Count.ToString());
                 item.SubItems.Add(hospital.Patients.Count.ToString());
@@ -347,6 +457,7 @@ namespace Hospital_System_Lab_2
                         item.SubItems.Add(hospitalEntity.Name);
                         item.SubItems.Add(hospitalEntity.Description);
                         item.SubItems.Add(hospitalEntity.Address);
+                        item.SubItems.Add(textBox7.Text);
                         item.SubItems.Add("0");
                         item.SubItems.Add("0");
                         item.SubItems.Add("0");
@@ -360,6 +471,106 @@ namespace Hospital_System_Lab_2
                 MessageBox.Show(ex.Message);
             }
         }
+        private Label label5;
+        private Label label6;
+        private Label label7;
+        private Label label8;
+        private ColumnHeader columnHeader8;
+        private TextBox durationFromTextBox;
+        private TextBox durationToTextBox;
+        private TextBox textBox7;
+        private Label label9;
+        private Button filterButton;
 
+
+
+        private void filterButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!DataManager.Entities.Any())
+                {
+                    return;
+                }
+
+                MainListView.Items.Clear();
+
+                IEnumerable<IEntity> filteredEntities = new List<IEntity>();
+                if (string.IsNullOrEmpty(durationFromTextBox.Text) || string.IsNullOrEmpty(durationToTextBox.Text))
+                {
+                    filteredEntities = DataManager.Entities;
+                }
+                else
+                {
+                    filteredEntities = DataManager.Filter(entity =>
+                    {
+                        TimeSpan? durationFrom = null;
+                        if (TimeSpan.TryParse(durationFromTextBox.Text, out var durationFromResult))
+                            durationFrom = durationFromResult;
+
+                        TimeSpan? durationTo = null;
+                        if (TimeSpan.TryParse(durationToTextBox.Text, out var durationToResult))
+                            durationTo = durationToResult;
+
+                        var hospital = entity as Hospital;
+                        if (hospital != null && hospital.DurationOfWork != null && durationFrom != null && durationTo != null)
+                        {
+                            return hospital.DurationOfWork >= durationFrom && hospital.DurationOfWork <= durationTo;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    });
+
+                    foreach (IEntity entity in filteredEntities)
+                    {
+                        if (entity is Hospital hospitalEntity)
+                        {
+                            var item = new ListViewItem(MainListView.Items.Count + 1 + "");
+                            item.SubItems.Add(hospitalEntity.Name);
+                            item.SubItems.Add(hospitalEntity.Description);
+                            item.SubItems.Add(hospitalEntity.Address);
+                            item.SubItems.Add(hospitalEntity.DurationOfWork != null
+                                ? hospitalEntity.DurationOfWork.Value.ToString()
+                                : string.Empty);
+                            item.SubItems.Add("0");
+                            item.SubItems.Add("0");
+                            item.SubItems.Add("0");
+
+                            MainListView.Items.Add(item);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+
+
+        //filter
+        private bool FilterHospitalByDurationOfWork(IEntity entity)
+        {
+            TimeSpan? durationFrom = null;
+            if (TimeSpan.TryParse(durationFromTextBox.Text, out var durationFromResult))
+                durationFrom = durationFromResult;
+
+            TimeSpan? durationTo = null;
+            if (TimeSpan.TryParse(durationToTextBox.Text, out var durationToResult))
+                durationTo = durationToResult;
+
+            var hospital = entity as Hospital;
+            if (hospital != null && hospital.DurationOfWork != null && durationFrom != null && durationTo != null)
+            {
+                return hospital.DurationOfWork >= durationFrom && hospital.DurationOfWork <= durationTo;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }
