@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace Hospital_System_Lab_2
 {
-    public delegate bool FilterDelegate(IEntity entity);
+    public delegate bool FilterDelegate<T>(T entity) where T : IEntity;
 }

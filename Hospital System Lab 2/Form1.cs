@@ -15,7 +15,7 @@ namespace Hospital_System_Lab_2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Entity entity = new Entity();
+            Entity entity = new Hospital(); 
             MessageBox.Show(entity.IsValid().ToString());
         }
 

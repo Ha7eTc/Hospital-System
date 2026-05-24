@@ -7,9 +7,24 @@ namespace Hospital_System_Lab_2
 {
     public partial class MainForm : MaterialForm
     {
+        private readonly DataManager<Hospital> dataManager;
         public MainForm()
         {
             InitializeComponent();
+            dataManager = new DataManager<Hospital>();
+
+            StatusLabel = new ToolStripStatusLabel();
+            statusStrip1.Items.Add(StatusLabel);
+
+            MainListView.SelectedIndexChanged += (sender, e) =>
+            {
+                if (MainListView.SelectedItems.Count > 0)
+                {
+                    var index = MainListView.SelectedIndices[0];
+                    var hospital = dataManager.Entities.ElementAt(index);
+                    StatusLabel.Text = hospital.Format();
+                }
+            };
 
             // Create a material theme manager and apply it to the form
             var materialSkinManager = MaterialSkinManager.Instance;
@@ -21,7 +36,24 @@ namespace Hospital_System_Lab_2
                 Primary.Blue400, Primary.Blue700,
                 Primary.Blue100, Accent.LightBlue200,
                 TextShade.WHITE
+
             );
+
+            var hospitals = FileManager.GetEntities<Hospital>("Hospital.txt");
+            foreach (var hospital in hospitals)
+            {
+                dataManager.Add(hospital);
+                var item = new ListViewItem(MainListView.Items.Count + 1 + "");
+                item.SubItems.Add(hospital.Name);
+                item.SubItems.Add(hospital.Description);
+                item.SubItems.Add(hospital.Address);
+                item.SubItems.Add(hospital.DurationOfWork.ToString());
+                item.SubItems.Add(hospital.Doctors.Count.ToString());
+                item.SubItems.Add(hospital.Patients.Count.ToString());
+                item.SubItems.Add(hospital.Nurses.Count.ToString());
+
+                MainListView.Items.Add(item);
+            }
         }
 
         private void InitializeComponent()
@@ -55,6 +87,9 @@ namespace Hospital_System_Lab_2
             textBox7 = new TextBox();
             label9 = new Label();
             filterButton = new Button();
+            statusStrip1 = new StatusStrip();
+            StatusLabel = new ToolStripStatusLabel();
+            statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // MainListView
@@ -290,9 +325,28 @@ namespace Hospital_System_Lab_2
             filterButton.UseVisualStyleBackColor = false;
             filterButton.Click += filterButton_Click;
             // 
+            // statusStrip1
+            // 
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { StatusLabel });
+            statusStrip1.Location = new Point(0, 735);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(1396, 26);
+            statusStrip1.TabIndex = 22;
+            statusStrip1.Text = "statusStrip1";
+            statusStrip1.ItemClicked += statusStrip1_ItemClicked;
+            // 
+            // StatusLabel
+            // 
+            StatusLabel.Name = "StatusLabel";
+            StatusLabel.Size = new Size(52, 20);
+            StatusLabel.Text = "Status:";
+            StatusLabel.Click += StatusLabel_Click;
+            // 
             // MainForm
             // 
             ClientSize = new Size(1396, 761);
+            Controls.Add(statusStrip1);
             Controls.Add(filterButton);
             Controls.Add(label9);
             Controls.Add(textBox7);
@@ -317,6 +371,8 @@ namespace Hospital_System_Lab_2
             Name = "MainForm";
             Text = "Hospital System";
             Load += MainForm_Load;
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
 
@@ -377,7 +433,7 @@ namespace Hospital_System_Lab_2
                 );
 
                 FileManager.Add(hospital);
-                DataManager.Add(hospital);
+                dataManager.Add(hospital);
 
                 var item = new ListViewItem((MainListView.Items.Count + 1).ToString());
 
@@ -420,37 +476,28 @@ namespace Hospital_System_Lab_2
         {
             try
             {
-                // якщо немаЇ жодноњ сутност≥ Ч не виконуЇмо пошук ≥ виходимо з методу
-                if (!DataManager.Entities.Any())
+                if (!dataManager.Entities.Any())
                 {
                     return;
                 }
 
-                // ќчищаЇмо список перед заповненн€м знайденими елементами
                 MainListView.Items.Clear();
 
                 IEnumerable<IEntity> foundEntities = new List<IEntity>();
                 if (string.IsNullOrEmpty(SearchListView.Text))
                 {
-                    // якщо поле пошуку порожнЇ Ч завантажуЇмо вс≥ концерти
-                    foundEntities = DataManager.Entities;
+                    foundEntities = dataManager.Entities;
                 }
                 else
                 {
-                    // ≤накше Ч виконуЇмо пошук по списку концерт≥в
-                    // DataManager шукаЇ елементи у списку DataManager.Entities,
-                    // до €кого ми додавали елементи у обробнику addRecordBtn_Click
-                    foundEntities = DataManager.Search(SearchListView.Text);
+                    foundEntities = dataManager.Search(SearchListView.Text);
                 }
 
                 foreach (IEntity entity in foundEntities)
                 {
-                    //  астуЇмо IEntity до типу Concert, щоб отримати вс≥ потр≥бн≥ дан≥
-                    // ƒо касту IEntity мав лише властив≥сть Id, але нам потр≥бн≥ Name та ≥нш≥
-                    //  аст можливий, бо Concert реал≥зуЇ ≥нтерфейс IEntity
+
                     var hospitalEntity = entity as Hospital;
 
-                    // якщо каст усп≥шний Ч заповнюЇмо listView знайденими концертами
                     if (hospitalEntity != null)
                     {
                         var item = new ListViewItem(MainListView.Items.Count + 1 + "");
@@ -488,7 +535,7 @@ namespace Hospital_System_Lab_2
         {
             try
             {
-                if (!DataManager.Entities.Any())
+                if (!dataManager.Entities.Any())
                 {
                     return;
                 }
@@ -498,11 +545,11 @@ namespace Hospital_System_Lab_2
                 IEnumerable<IEntity> filteredEntities = new List<IEntity>();
                 if (string.IsNullOrEmpty(durationFromTextBox.Text) || string.IsNullOrEmpty(durationToTextBox.Text))
                 {
-                    filteredEntities = DataManager.Entities;
+                    filteredEntities = dataManager.Entities;
                 }
                 else
                 {
-                    filteredEntities = DataManager.Filter(entity =>
+                    filteredEntities = dataManager.Filter(entity =>
                     {
                         TimeSpan? durationFrom = null;
                         if (TimeSpan.TryParse(durationFromTextBox.Text, out var durationFromResult))
@@ -572,5 +619,18 @@ namespace Hospital_System_Lab_2
                 return false;
             }
         }
+        private StatusStrip statusStrip1;
+
+        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+        }
+        private ToolStripStatusLabel StatusLabel;
+
+        private void StatusLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
     }
 }

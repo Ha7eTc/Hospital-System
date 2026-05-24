@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Hospital_System_Lab_2
 {
-    public class Entity
+    public abstract class Entity: IEntity
     {
-        public virtual string FileName { get; }
+        public virtual string FileName { get; } = string.Empty;
         public Guid Id { get; set; }
         public Entity()
         {
@@ -27,5 +27,7 @@ namespace Hospital_System_Lab_2
         {
             return "["+Id.ToString()+"]";
         }
+        public abstract void Parse(string record);
+        public abstract bool Search(string searchString);
     }
 }

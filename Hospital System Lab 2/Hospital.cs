@@ -70,40 +70,36 @@ namespace Hospital_System_Lab_2
             return $"{base.Format()}[{Name}][{Address}][{Description}][{DurationOfWork}][{DoctorsIdStr}][{PatientsIdStr}][{NursesIdStr}]";
         }
 
-        public virtual void Parse(string record)
+        public override void Parse(string record)
         {
-            // 1. Стандартна перевірка на порожнечу
             if (string.IsNullOrWhiteSpace(record))
             {
                 throw new ArgumentException("Record cannot be null or empty.", nameof(record));
             }
 
-            // 2. Розбиваємо рядок. Очікуємо 2 частини: Назва та Адреса
             var parts = record.Trim('[', ']').Split(new[] { "][" }, StringSplitOptions.None);
 
-            // 3. Перевірка формату (мінімум 2 поля)
             if (parts.Length < 4)
             {
                 throw new FormatException("Invalid hospital record format. Expected [Name][Address][Description][DurationOfWork].");
             }
 
-            // 4. Присвоєння значень
-            Name = parts[0];
-            Address = parts[1];
-            Description = parts[2];
+            Id = Guid.Parse(parts[0]);
+            Name = parts[1];
+            Address = parts[2];
+            Description = parts[3];
 
-            if (TimeSpan.TryParse(parts[3], out TimeSpan duration))
+            if (parts.Length > 4 && TimeSpan.TryParse(parts[4], out TimeSpan duration))
                 DurationOfWork = duration;
             else
-                throw new FormatException($"Invalid DurationOfWork format: '{parts[3]}'. Expected hh:mm:ss.");
+                DurationOfWork = TimeSpan.Zero;
 
-            // 5. Очищуємо списки перед новим заповненням (опціонально)
             Doctors?.Clear();
             Patients?.Clear();
             Nurses?.Clear();
         }
 
-        public bool Search(string stringSearch)
+        public override bool Search(string stringSearch)
         {
             return Name!.Contains(stringSearch, StringComparison.OrdinalIgnoreCase) ||
                    Address!.Contains(stringSearch, StringComparison.OrdinalIgnoreCase) ||

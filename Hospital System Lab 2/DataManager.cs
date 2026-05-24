@@ -6,15 +6,28 @@ using System.Threading.Tasks;
 
 namespace Hospital_System_Lab_2
 {
-    public static class DataManager
+    public class DataManager<T> where T : IEntity 
     {
-        public static IEnumerable<IEntity> Entities { get; private set; } = new List<IEntity>();
-        public static void Add(IEntity entity)
+        public IEnumerable<T> Entities { get; private set; } = new List<T>();
+        public T? this[Guid id]
+        {
+            get
+            {
+                T? entity = default;
+                foreach (var item in Entities)
+                {
+                    if (item.Id == id)
+                        return item;
+                }
+                return entity;
+            }
+        }
+        public void Add(T entity)
         {
             Entities = Entities.Append(entity);
         }
 
-        public static IEnumerable<IEntity> Search(string searchString)
+        public IEnumerable<T> Search(string searchString)
         {
             foreach (var entity in Entities)
             {
@@ -25,7 +38,7 @@ namespace Hospital_System_Lab_2
             }
         }
 
-        public static IEnumerable<IEntity> Filter(FilterDelegate filter)
+        public IEnumerable<T> Filter(FilterDelegate<T> filter)
         {
             foreach (var entity in Entities)
             {

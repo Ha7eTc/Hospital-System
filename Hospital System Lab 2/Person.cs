@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hospital_System_Lab_2
 {
-    public class Person : Entity, IEntity
+    public class Person : Entity
     {
         public override string FileName => "Person.txt";
 
@@ -37,30 +37,26 @@ namespace Hospital_System_Lab_2
         {
             return $"{base.Format()}[{FirstName}][{LastName}][{Email}]";
         }
-        public virtual void Parse(string record)
+        public override void Parse(string record)
         {
-            // 1. Перевірка на пустий рядок
+
             if (string.IsNullOrWhiteSpace(record))
             {
                 throw new ArgumentException("Record cannot be null or empty.", nameof(record));
             }
 
-            // 2. Очищення від крайніх дужок та розділення по комбінації ][
             var parts = record.Trim('[', ']').Split(new[] { "][" }, StringSplitOptions.None);
 
-            // 3. Перевірка кількості отриманих елементів (має бути 4)
             if (parts.Length != 4)
             {
                 throw new FormatException("Invalid record format.");
             }
 
-            // 4. Спроба перетворити перший елемент у формат Guid (унікальний ID)
             if (!Guid.TryParse(parts[0], out Guid id))
             {
                 throw new FormatException("Invalid ID format.");
             }
 
-            // 5. Присвоєння значень властивостям об'єкта
             Id = id;
             FirstName = parts[1];
             LastName = parts[2];
@@ -69,7 +65,7 @@ namespace Hospital_System_Lab_2
 
 
         }
-        public bool Search(string stringSearch)
+        public override bool Search(string stringSearch)
         {
             return FirstName!.Contains(stringSearch, StringComparison.OrdinalIgnoreCase) ||
                    LastName!.Contains(stringSearch, StringComparison.OrdinalIgnoreCase ) ||

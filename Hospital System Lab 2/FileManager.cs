@@ -27,6 +27,17 @@ namespace Hospital_System_Lab_2
                 writer.WriteLine(record);
             }
         }
+
+        public static IEnumerable<T> GetEntities<T>(string path) where T : IEntity, new()
+        {
+            var lines = File.ReadAllLines(path);
+            foreach (var line in lines)
+            {
+                var entity = new T();
+                entity.Parse(line);
+                yield return entity;
+            }
+        }
     }
 
 }
