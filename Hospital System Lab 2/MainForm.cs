@@ -8,6 +8,10 @@ namespace Hospital_System_Lab_2
     public partial class MainForm : MaterialForm
     {
         private readonly DataManager<Hospital> dataManager;
+
+        private const int PAGE_LIMIT = 5;
+        private int currentPage = 0;
+
         public MainForm()
         {
             InitializeComponent();
@@ -39,7 +43,16 @@ namespace Hospital_System_Lab_2
 
             );
 
+
             var hospitals = FileManager.GetEntities<Hospital>("Hospital.txt");
+
+
+            var ordered = hospitals
+               .OrderBy(x => x.Name);
+
+            ordered.ToList().ForEach(e => dataManager.Add(e));
+
+            hospitals = ordered.Paginate(currentPage, PAGE_LIMIT);
             foreach (var hospital in hospitals)
             {
                 dataManager.Add(hospital);
@@ -77,7 +90,6 @@ namespace Hospital_System_Lab_2
             label3 = new Label();
             SearchListView = new TextBox();
             label4 = new Label();
-            SearchClickButton = new Button();
             label5 = new Label();
             label6 = new Label();
             label7 = new Label();
@@ -89,18 +101,23 @@ namespace Hospital_System_Lab_2
             filterButton = new Button();
             statusStrip1 = new StatusStrip();
             StatusLabel = new ToolStripStatusLabel();
+            sortBtn = new Button();
+            prevBtn = new Button();
+            nextBtn = new Button();
+            pageNumTextBox = new TextBox();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // MainListView
             // 
             MainListView.Columns.AddRange(new ColumnHeader[] { columnHeader2, columnHeader1, columnHeader7, columnHeader3, columnHeader8, columnHeader4, columnHeader5, columnHeader6 });
-            MainListView.Location = new Point(54, 181);
+            MainListView.Location = new Point(54, 226);
             MainListView.Name = "MainListView";
-            MainListView.Size = new Size(1028, 526);
+            MainListView.Size = new Size(1028, 481);
             MainListView.TabIndex = 0;
             MainListView.UseCompatibleStateImageBehavior = false;
             MainListView.View = View.Details;
+            MainListView.SelectedIndexChanged += MainListView_SelectedIndexChanged;
             // 
             // columnHeader2
             // 
@@ -219,7 +236,7 @@ namespace Hospital_System_Lab_2
             // 
             // SearchListView
             // 
-            SearchListView.Location = new Point(54, 108);
+            SearchListView.Location = new Point(54, 119);
             SearchListView.Multiline = true;
             SearchListView.Name = "SearchListView";
             SearchListView.Size = new Size(208, 49);
@@ -228,27 +245,16 @@ namespace Hospital_System_Lab_2
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(54, 85);
+            label4.Location = new Point(54, 96);
             label4.Name = "label4";
             label4.Size = new Size(53, 20);
             label4.TabIndex = 10;
             label4.Text = "Search";
             // 
-            // SearchClickButton
-            // 
-            SearchClickButton.BackColor = SystemColors.ActiveCaption;
-            SearchClickButton.Location = new Point(282, 108);
-            SearchClickButton.Name = "SearchClickButton";
-            SearchClickButton.Size = new Size(71, 49);
-            SearchClickButton.TabIndex = 12;
-            SearchClickButton.Text = "search";
-            SearchClickButton.UseVisualStyleBackColor = false;
-            SearchClickButton.Click += SearchButtonClick;
-            // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(578, 65);
+            label5.Location = new Point(312, 66);
             label5.Name = "label5";
             label5.Size = new Size(174, 20);
             label5.TabIndex = 13;
@@ -257,7 +263,7 @@ namespace Hospital_System_Lab_2
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(579, 96);
+            label6.Location = new Point(313, 97);
             label6.Name = "label6";
             label6.Size = new Size(43, 20);
             label6.TabIndex = 14;
@@ -266,7 +272,7 @@ namespace Hospital_System_Lab_2
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(725, 96);
+            label7.Location = new Point(459, 97);
             label7.Name = "label7";
             label7.Size = new Size(25, 20);
             label7.TabIndex = 15;
@@ -275,7 +281,7 @@ namespace Hospital_System_Lab_2
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(704, 133);
+            label8.Location = new Point(438, 134);
             label8.Name = "label8";
             label8.Size = new Size(15, 20);
             label8.TabIndex = 16;
@@ -283,7 +289,7 @@ namespace Hospital_System_Lab_2
             // 
             // durationFromTextBox
             // 
-            durationFromTextBox.Location = new Point(579, 119);
+            durationFromTextBox.Location = new Point(313, 120);
             durationFromTextBox.Multiline = true;
             durationFromTextBox.Name = "durationFromTextBox";
             durationFromTextBox.Size = new Size(110, 49);
@@ -291,7 +297,7 @@ namespace Hospital_System_Lab_2
             // 
             // durationToTextBox
             // 
-            durationToTextBox.Location = new Point(725, 119);
+            durationToTextBox.Location = new Point(459, 120);
             durationToTextBox.Multiline = true;
             durationToTextBox.Name = "durationToTextBox";
             durationToTextBox.Size = new Size(125, 48);
@@ -317,11 +323,11 @@ namespace Hospital_System_Lab_2
             // filterButton
             // 
             filterButton.BackColor = SystemColors.ActiveCaption;
-            filterButton.Location = new Point(870, 119);
+            filterButton.Location = new Point(604, 120);
             filterButton.Name = "filterButton";
             filterButton.Size = new Size(73, 48);
             filterButton.TabIndex = 21;
-            filterButton.Text = "search";
+            filterButton.Text = "Search";
             filterButton.UseVisualStyleBackColor = false;
             filterButton.Click += filterButton_Click;
             // 
@@ -343,9 +349,57 @@ namespace Hospital_System_Lab_2
             StatusLabel.Text = "Status:";
             StatusLabel.Click += StatusLabel_Click;
             // 
+            // sortBtn
+            // 
+            sortBtn.BackColor = SystemColors.ActiveCaption;
+            sortBtn.Location = new Point(708, 120);
+            sortBtn.Name = "sortBtn";
+            sortBtn.Size = new Size(68, 46);
+            sortBtn.TabIndex = 23;
+            sortBtn.Text = "Sort";
+            sortBtn.UseVisualStyleBackColor = false;
+            sortBtn.Click += sortBtn_Click;
+            // 
+            // prevBtn
+            // 
+            prevBtn.BackColor = SystemColors.ActiveCaption;
+            prevBtn.Location = new Point(54, 184);
+            prevBtn.Name = "prevBtn";
+            prevBtn.Size = new Size(69, 36);
+            prevBtn.TabIndex = 24;
+            prevBtn.Text = "PREV";
+            prevBtn.UseVisualStyleBackColor = false;
+            prevBtn.Click += prevBtn_Click;
+            // 
+            // nextBtn
+            // 
+            nextBtn.BackColor = SystemColors.ActiveCaption;
+            nextBtn.Location = new Point(168, 184);
+            nextBtn.Name = "nextBtn";
+            nextBtn.Size = new Size(71, 36);
+            nextBtn.TabIndex = 25;
+            nextBtn.Text = "NEXT";
+            nextBtn.UseVisualStyleBackColor = false;
+            nextBtn.Click += nextBtn_Click;
+            // 
+            // pageNumTextBox
+            // 
+            pageNumTextBox.Location = new Point(129, 189);
+            pageNumTextBox.Name = "pageNumTextBox";
+            pageNumTextBox.ReadOnly = true;
+            pageNumTextBox.Size = new Size(33, 27);
+            pageNumTextBox.TabIndex = 26;
+            pageNumTextBox.Text = "1";
+            pageNumTextBox.TextAlign = HorizontalAlignment.Center;
+            pageNumTextBox.TextChanged += textBox5_TextChanged;
+            // 
             // MainForm
             // 
             ClientSize = new Size(1396, 761);
+            Controls.Add(pageNumTextBox);
+            Controls.Add(nextBtn);
+            Controls.Add(prevBtn);
+            Controls.Add(sortBtn);
             Controls.Add(statusStrip1);
             Controls.Add(filterButton);
             Controls.Add(label9);
@@ -356,7 +410,6 @@ namespace Hospital_System_Lab_2
             Controls.Add(label7);
             Controls.Add(label6);
             Controls.Add(label5);
-            Controls.Add(SearchClickButton);
             Controls.Add(label4);
             Controls.Add(SearchListView);
             Controls.Add(label3);
@@ -469,7 +522,6 @@ namespace Hospital_System_Lab_2
         private Label label3;
         private TextBox SearchListView;
         private Label label4;
-        private Button SearchClickButton;
 
 
         private void SearchButtonClick(object sender, EventArgs e)
@@ -542,53 +594,50 @@ namespace Hospital_System_Lab_2
 
                 MainListView.Items.Clear();
 
-                IEnumerable<IEntity> filteredEntities = new List<IEntity>();
-                if (string.IsNullOrEmpty(durationFromTextBox.Text) || string.IsNullOrEmpty(durationToTextBox.Text))
+                IEnumerable<Hospital> foundEntities = new List<Hospital>();
+                if (string.IsNullOrEmpty(durationFromTextBox.Text) &&
+                    string.IsNullOrEmpty(durationToTextBox.Text) &&
+                    string.IsNullOrEmpty(SearchListView.Text))
                 {
-                    filteredEntities = dataManager.Entities;
+                    foundEntities = dataManager.Entities
+                         .OrderBy(x => x.Name)
+                         .Paginate(currentPage, PAGE_LIMIT);
                 }
                 else
                 {
-                    filteredEntities = dataManager.Filter(entity =>
-                    {
-                        TimeSpan? durationFrom = null;
-                        if (TimeSpan.TryParse(durationFromTextBox.Text, out var durationFromResult))
-                            durationFrom = durationFromResult;
+                    TimeSpan? durationFrom = null;
+                    if (TimeSpan.TryParse(durationFromTextBox.Text, out var durationFromResult))
+                        durationFrom = durationFromResult;
 
-                        TimeSpan? durationTo = null;
-                        if (TimeSpan.TryParse(durationToTextBox.Text, out var durationToResult))
-                            durationTo = durationToResult;
+                    TimeSpan? durationTo = null;
+                    if (TimeSpan.TryParse(durationToTextBox.Text, out var durationToResult))
+                        durationTo = durationToResult;
 
-                        var hospital = entity as Hospital;
-                        if (hospital != null && hospital.DurationOfWork != null && durationFrom != null && durationTo != null)
-                        {
-                            return hospital.DurationOfWork >= durationFrom && hospital.DurationOfWork <= durationTo;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    });
 
-                    foreach (IEntity entity in filteredEntities)
-                    {
-                        if (entity is Hospital hospitalEntity)
-                        {
-                            var item = new ListViewItem(MainListView.Items.Count + 1 + "");
-                            item.SubItems.Add(hospitalEntity.Name);
-                            item.SubItems.Add(hospitalEntity.Description);
-                            item.SubItems.Add(hospitalEntity.Address);
-                            item.SubItems.Add(hospitalEntity.DurationOfWork != null
-                                ? hospitalEntity.DurationOfWork.Value.ToString()
-                                : string.Empty);
-                            item.SubItems.Add("0");
-                            item.SubItems.Add("0");
-                            item.SubItems.Add("0");
+                    foundEntities = dataManager.Entities
+                     .Where(e => (string.IsNullOrEmpty(SearchListView.Text) || e.Search(SearchListView.Text)) &&
+                                 (durationFrom == null || durationTo == null ||
+                                 (e.DurationOfWork >= durationFrom && e.DurationOfWork <= durationTo)))
+                     .OrderBy(x => x.Name)
+                     .Paginate(currentPage, PAGE_LIMIT);
 
-                            MainListView.Items.Add(item);
-                        }
-                    }
                 }
+
+                foundEntities.ToList().ForEach(e =>
+                {
+                    var item = new ListViewItem(MainListView.Items.Count + 1 + "");
+                    item.SubItems.Add(e.Name);
+                    item.SubItems.Add(e.Description);
+                    item.SubItems.Add(e.Address);
+                    item.SubItems.Add(e.DurationOfWork != null
+                        ? e.DurationOfWork.Value.ToString()
+                        : string.Empty);
+                    item.SubItems.Add("0");
+                    item.SubItems.Add("0");
+                    item.SubItems.Add("0");
+
+                    MainListView.Items.Add(item);
+                });
             }
             catch (Exception ex)
             {
@@ -631,6 +680,118 @@ namespace Hospital_System_Lab_2
 
         }
 
+        private void MainListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
+        }
+        private Button sortBtn;
+
+
+
+        private void sortBtn_Click(object sender, EventArgs e)
+        {
+            // Remove all items from the list to fill the list view only with found items
+            MainListView.Items.Clear();
+
+            var hospitals = dataManager.Entities
+                .OrderBy(x => x.Name);
+
+            foreach (var hospital in hospitals)
+            {
+                var item = new ListViewItem(MainListView.Items.Count + 1 + "");
+                item.SubItems.Add(hospital.Name);
+                item.SubItems.Add(hospital.Description);
+                item.SubItems.Add(hospital.Address);
+                item.SubItems.Add(hospital.DurationOfWork.ToString());
+                item.SubItems.Add(hospital.Doctors.Count.ToString());
+                item.SubItems.Add(hospital.Patients.Count.ToString());
+                item.SubItems.Add(hospital.Nurses.Count.ToString());
+
+                MainListView.Items.Add(item);
+            }
+        }
+
+
+        private void hospitalListView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Ensure an item is selected
+            if (MainListView.SelectedItems.Count > 0)
+            {
+                // Get the selected index
+                int selectedIndex = MainListView.SelectedIndices[0];
+
+                // Get the selected item's text
+                string selectedItemText = MainListView.SelectedItems[0].SubItems[7].Text;
+
+                // Hospital to the Guid
+                var id = Guid.Parse(selectedItemText);
+
+                // Get only several fields of Hospital to display using LINQ
+                var data = dataManager.Entities
+                    .Where(x => x.Id == id)
+                    .Select(x => x.Name + " " + x.Description + " " + x.DurationOfWork.ToString())
+                    .FirstOrDefault();
+
+                if (!string.IsNullOrEmpty(data))
+                {
+                    statusStrip1.Text = data;
+                }
+            }
+        }
+        private Button prevBtn;
+        private Button nextBtn;
+        private TextBox pageNumTextBox;
+
+        private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void Paginate()
+        {
+            MainListView.Items.Clear();
+
+            var data = dataManager.Entities
+                .OrderBy(x => x.Name)
+                .Skip(currentPage * PAGE_LIMIT)    //replace in future
+                .Take(PAGE_LIMIT)
+                .ToList();
+
+            data.ForEach(e =>
+            {
+                var item = new ListViewItem(MainListView.Items.Count + 1 + "");
+                item.SubItems.Add(e.Name);
+                item.SubItems.Add(e.Description);
+                item.SubItems.Add(e.Address);
+                item.SubItems.Add(e.DurationOfWork.ToString());
+                item.SubItems.Add(e.Doctors.Count.ToString());
+                item.SubItems.Add(e.Patients.Count.ToString());
+                item.SubItems.Add(e.Nurses.Count.ToString());
+
+                MainListView.Items.Add(item);
+            });
+
+            this.pageNumTextBox.Text = (currentPage + 1).ToString();
+        }
+
+
+        private void prevBtn_Click(object sender, EventArgs e)
+        {
+            if (currentPage > 0 && dataManager.Entities.Any())
+            {
+                currentPage--;
+                Paginate();
+            }
+        }
+
+        private void nextBtn_Click(object sender, EventArgs e)
+        {
+            if (currentPage < dataManager.Entities.Count() / PAGE_LIMIT && dataManager.Entities.Any())
+            {
+                currentPage++;
+                Paginate();
+            }
+        }
     }
 }

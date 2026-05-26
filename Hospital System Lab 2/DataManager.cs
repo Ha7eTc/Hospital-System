@@ -13,13 +13,7 @@ namespace Hospital_System_Lab_2
         {
             get
             {
-                T? entity = default;
-                foreach (var item in Entities)
-                {
-                    if (item.Id == id)
-                        return item;
-                }
-                return entity;
+                return Entities.FirstOrDefault(e => e.Id == id);
             }
         }
         public void Add(T entity)
@@ -29,24 +23,12 @@ namespace Hospital_System_Lab_2
 
         public IEnumerable<T> Search(string searchString)
         {
-            foreach (var entity in Entities)
-            {
-                if (entity.Search(searchString))
-                {
-                    yield return entity;
-                }
-            }
+            return Entities.Where(it => it.Search(searchString));
         }
 
-        public IEnumerable<T> Filter(FilterDelegate<T> filter)
+        public IEnumerable<T> Filter(Func<T, bool> filter)
         {
-            foreach (var entity in Entities)
-            {
-                if (filter.Invoke(entity))
-                {
-                    yield return entity;
-                }
-            }
+            return Entities.Where(filter);
         }
     }
 }
