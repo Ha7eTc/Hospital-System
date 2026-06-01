@@ -10,6 +10,8 @@ namespace Hospital_System_Lab_2
     {
         public override string FileName => "Patient.txt";
         public string? Phone {  get; set; }
+        public Guid? DoctorId { get; set; }
+        public Doctor? Doctor { get; set; }
         public Patient()
         {
             Phone = string.Empty;

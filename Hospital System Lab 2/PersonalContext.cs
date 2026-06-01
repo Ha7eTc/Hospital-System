@@ -12,6 +12,7 @@ namespace Hospital_System_Lab_2
        public DbSet<Doctor> Doctors { get; set; }
        public DbSet<Nurse> Nurses { get; set; }
        public DbSet<Person> Persons { get; set; }
+       public DbSet<Patient> Patients { get; set; }
 
         public PersonalContext()
         {
@@ -24,7 +25,7 @@ namespace Hospital_System_Lab_2
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // TPH — одна таблиця Persons з колонкою-дискримінатором
+
             modelBuilder.Entity<Person>()
                 .HasDiscriminator<string>("PersonType")
                 .HasValue<Person>("Person")
@@ -40,6 +41,12 @@ namespace Hospital_System_Lab_2
             modelBuilder.Entity<Nurse>()
                 .Property(n => n.Departament)
                 .HasMaxLength(100);
+
+            modelBuilder.Entity<Doctor>()
+           .HasMany(d => d.Patients)
+           .WithOne(p => p.Doctor)
+           .HasForeignKey(p => p.DoctorId)
+           .OnDelete(DeleteBehavior.SetNull);
         }
 
     }

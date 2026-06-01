@@ -40,6 +40,7 @@
             columnHeader4 = new ColumnHeader();
             columnHeader5 = new ColumnHeader();
             columnHeader6 = new ColumnHeader();
+            columnHeader7 = new ColumnHeader();
             textBoxFirstName = new TextBox();
             label1 = new Label();
             textBoxLastName = new TextBox();
@@ -53,13 +54,16 @@
             label6 = new Label();
             addButtonPersInfo = new Button();
             comboBoxPersType = new ComboBox();
-            columnHeader7 = new ColumnHeader();
+            buttonGetAll = new Button();
+            buttonGetAllDoctors = new Button();
+            buttonGetAllNurses = new Button();
+            buttonSortPersInfo = new Button();
             SuspendLayout();
             // 
             // listViewPersInfo
             // 
             listViewPersInfo.Columns.AddRange(new ColumnHeader[] { columnHeader1, columnHeader2, columnHeader3, columnHeader4, columnHeader5, columnHeader6, columnHeader7 });
-            listViewPersInfo.Location = new Point(483, 159);
+            listViewPersInfo.Location = new Point(483, 178);
             listViewPersInfo.Name = "listViewPersInfo";
             listViewPersInfo.Size = new Size(654, 282);
             listViewPersInfo.TabIndex = 1;
@@ -95,6 +99,11 @@
             // 
             columnHeader6.Text = "Departament";
             columnHeader6.Width = 100;
+            // 
+            // columnHeader7
+            // 
+            columnHeader7.Text = "Personal Type";
+            columnHeader7.Width = 120;
             // 
             // textBoxFirstName
             // 
@@ -215,16 +224,59 @@
             comboBoxPersType.Size = new Size(125, 28);
             comboBoxPersType.TabIndex = 15;
             // 
-            // columnHeader7
+            // buttonGetAll
             // 
-            columnHeader7.Text = "Personal Type";
-            columnHeader7.Width = 120;
+            buttonGetAll.BackColor = SystemColors.ActiveCaption;
+            buttonGetAll.Location = new Point(483, 106);
+            buttonGetAll.Name = "buttonGetAll";
+            buttonGetAll.Size = new Size(94, 50);
+            buttonGetAll.TabIndex = 16;
+            buttonGetAll.Text = "Get all";
+            buttonGetAll.UseVisualStyleBackColor = false;
+            buttonGetAll.Click += buttonGetAll_Click;
+            // 
+            // buttonGetAllDoctors
+            // 
+            buttonGetAllDoctors.BackColor = SystemColors.ActiveCaption;
+            buttonGetAllDoctors.Location = new Point(583, 106);
+            buttonGetAllDoctors.Name = "buttonGetAllDoctors";
+            buttonGetAllDoctors.Size = new Size(94, 50);
+            buttonGetAllDoctors.TabIndex = 17;
+            buttonGetAllDoctors.Text = "Get all doctors";
+            buttonGetAllDoctors.UseVisualStyleBackColor = false;
+            buttonGetAllDoctors.Click += buttonGetAllDoctors_Click;
+            // 
+            // buttonGetAllNurses
+            // 
+            buttonGetAllNurses.BackColor = SystemColors.ActiveCaption;
+            buttonGetAllNurses.Location = new Point(683, 106);
+            buttonGetAllNurses.Name = "buttonGetAllNurses";
+            buttonGetAllNurses.Size = new Size(94, 50);
+            buttonGetAllNurses.TabIndex = 18;
+            buttonGetAllNurses.Text = "Get all nurses";
+            buttonGetAllNurses.UseVisualStyleBackColor = false;
+            buttonGetAllNurses.Click += buttonGetAllNurses_Click;
+            // 
+            // buttonSortPersInfo
+            // 
+            buttonSortPersInfo.BackColor = SystemColors.ActiveCaption;
+            buttonSortPersInfo.Location = new Point(1043, 106);
+            buttonSortPersInfo.Name = "buttonSortPersInfo";
+            buttonSortPersInfo.Size = new Size(94, 50);
+            buttonSortPersInfo.TabIndex = 19;
+            buttonSortPersInfo.Text = "Sort";
+            buttonSortPersInfo.UseVisualStyleBackColor = false;
+            buttonSortPersInfo.Click += buttonSortPersInfo_Click;
             // 
             // FillingInPersonnelInformation
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1208, 546);
+            Controls.Add(buttonSortPersInfo);
+            Controls.Add(buttonGetAllNurses);
+            Controls.Add(buttonGetAllDoctors);
+            Controls.Add(buttonGetAll);
             Controls.Add(comboBoxPersType);
             Controls.Add(addButtonPersInfo);
             Controls.Add(label6);
@@ -267,5 +319,9 @@
         private Button addButtonPersInfo;
         private ComboBox comboBoxPersType;
         private ColumnHeader columnHeader7;
+        private Button buttonGetAll;
+        private Button buttonGetAllDoctors;
+        private Button buttonGetAllNurses;
+        private Button buttonSortPersInfo;
     }
 }

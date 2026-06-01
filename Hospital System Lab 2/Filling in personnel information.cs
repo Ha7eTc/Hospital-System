@@ -114,7 +114,7 @@ namespace Hospital_System_Lab_2
 
 
             }
-           
+
             catch (Exception ex)
             {
                 var message = ex.Message;
@@ -123,6 +123,86 @@ namespace Hospital_System_Lab_2
                 MessageBox.Show(message);
             }
 
+        }
+
+        private void buttonGetAll_Click(object sender, EventArgs e)
+        {
+            using (var db = new PersonalContext())
+            {
+                var allPersons = db.Persons.ToList();
+
+
+                listViewPersInfo.Items.Clear();
+
+                foreach (var person in allPersons)
+                {
+                    var item = new ListViewItem((listViewPersInfo.Items.Count + 1).ToString());
+                    item.SubItems.Add(person.FirstName);
+                    item.SubItems.Add(person.LastName);
+                    item.SubItems.Add(person.Email);
+                    listViewPersInfo.Items.Add(item);
+                }
+            }
+        }
+
+        private void buttonGetAllDoctors_Click(object sender, EventArgs e)
+        {
+            using (var db = new PersonalContext())
+            {
+                var allDoctors = db.Persons.OfType<Doctor>().ToList();
+                listViewPersInfo.Items.Clear();
+
+                foreach (var doctor in allDoctors)
+                {
+                    var item = new ListViewItem((listViewPersInfo.Items.Count + 1).ToString());
+                    item.SubItems.Add(doctor.FirstName);
+                    item.SubItems.Add(doctor.LastName);
+                    item.SubItems.Add(doctor.Email);
+                    item.SubItems.Add(doctor.Specialization);
+                    listViewPersInfo.Items.Add(item);
+                }
+            }
+        }
+
+
+        private void buttonGetAllNurses_Click(object sender, EventArgs e)
+        {
+            using (var db = new PersonalContext())
+            {
+                var allNurses = db.Persons.OfType<Nurse>().ToList();
+                listViewPersInfo.Items.Clear();
+
+                foreach (var nurse in allNurses)
+                {
+                    var item = new ListViewItem((listViewPersInfo.Items.Count + 1).ToString());
+                    item.SubItems.Add(nurse.FirstName);
+                    item.SubItems.Add(nurse.LastName);
+                    item.SubItems.Add(nurse.Email);
+                    item.SubItems.Add(nurse.Departament);
+                    listViewPersInfo.Items.Add(item);
+                }
+            }
+        }
+
+
+        private void buttonSortPersInfo_Click(object sender, EventArgs e)
+        {
+            using (var db = new PersonalContext())
+            {
+                var sortedByLastName = db.Persons
+                .OrderBy(p => p.LastName)
+                .ToList();
+                listViewPersInfo.Items.Clear();
+
+                foreach (var person in sortedByLastName)
+                {
+                    var item = new ListViewItem((listViewPersInfo.Items.Count + 1).ToString());
+                    item.SubItems.Add(person.FirstName);
+                    item.SubItems.Add(person.LastName);
+                    item.SubItems.Add(person.Email);
+                    listViewPersInfo.Items.Add(item);
+                }
+            }
         }
     }
 }
