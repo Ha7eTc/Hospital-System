@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,7 +10,9 @@ namespace Hospital_System_Lab_2
 {
     public sealed class Doctor : Person
     {
+        [NotMapped]
         public override string FileName => "Doctor.txt";
+        [MaxLength(100)]
         public string? Specialization { get; set; }
         public Doctor()
         {

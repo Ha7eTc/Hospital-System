@@ -105,15 +105,16 @@ namespace Hospital_System_Lab_2
             prevBtn = new Button();
             nextBtn = new Button();
             pageNumTextBox = new TextBox();
+            btnToStaff = new Button();
             statusStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // MainListView
             // 
             MainListView.Columns.AddRange(new ColumnHeader[] { columnHeader2, columnHeader1, columnHeader7, columnHeader3, columnHeader8, columnHeader4, columnHeader5, columnHeader6 });
-            MainListView.Location = new Point(54, 226);
+            MainListView.Location = new Point(12, 230);
             MainListView.Name = "MainListView";
-            MainListView.Size = new Size(1028, 481);
+            MainListView.Size = new Size(1372, 221);
             MainListView.TabIndex = 0;
             MainListView.UseCompatibleStateImageBehavior = false;
             MainListView.View = View.Details;
@@ -160,7 +161,7 @@ namespace Hospital_System_Lab_2
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(1120, 194);
+            textBox1.Location = new Point(23, 520);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(233, 66);
@@ -170,7 +171,7 @@ namespace Hospital_System_Lab_2
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(1120, 171);
+            label1.Location = new Point(23, 497);
             label1.MaximumSize = new Size(100, 100);
             label1.Name = "label1";
             label1.Size = new Size(49, 20);
@@ -180,7 +181,7 @@ namespace Hospital_System_Lab_2
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(1152, 425);
+            textBox2.Location = new Point(661, 89);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(0, 27);
             textBox2.TabIndex = 3;
@@ -189,7 +190,7 @@ namespace Hospital_System_Lab_2
             // 
             add_button.BackColor = SystemColors.ActiveCaption;
             add_button.BackgroundImageLayout = ImageLayout.None;
-            add_button.Location = new Point(1120, 661);
+            add_button.Location = new Point(23, 607);
             add_button.Name = "add_button";
             add_button.Size = new Size(94, 46);
             add_button.TabIndex = 4;
@@ -199,7 +200,7 @@ namespace Hospital_System_Lab_2
             // 
             // textBox3
             // 
-            textBox3.Location = new Point(1120, 589);
+            textBox3.Location = new Point(289, 520);
             textBox3.Multiline = true;
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(233, 66);
@@ -209,7 +210,7 @@ namespace Hospital_System_Lab_2
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(1120, 566);
+            label2.Location = new Point(289, 502);
             label2.MaximumSize = new Size(100, 100);
             label2.Name = "label2";
             label2.Size = new Size(62, 20);
@@ -219,16 +220,16 @@ namespace Hospital_System_Lab_2
             // 
             // textBox4
             // 
-            textBox4.Location = new Point(1120, 313);
+            textBox4.Location = new Point(567, 520);
             textBox4.Multiline = true;
             textBox4.Name = "textBox4";
-            textBox4.Size = new Size(233, 114);
+            textBox4.Size = new Size(233, 66);
             textBox4.TabIndex = 7;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(1120, 290);
+            label3.Location = new Point(567, 497);
             label3.Name = "label3";
             label3.Size = new Size(81, 20);
             label3.TabIndex = 8;
@@ -236,7 +237,7 @@ namespace Hospital_System_Lab_2
             // 
             // SearchListView
             // 
-            SearchListView.Location = new Point(54, 119);
+            SearchListView.Location = new Point(23, 100);
             SearchListView.Multiline = true;
             SearchListView.Name = "SearchListView";
             SearchListView.Size = new Size(208, 49);
@@ -245,7 +246,7 @@ namespace Hospital_System_Lab_2
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(54, 96);
+            label4.Location = new Point(23, 77);
             label4.Name = "label4";
             label4.Size = new Size(53, 20);
             label4.TabIndex = 10;
@@ -254,7 +255,7 @@ namespace Hospital_System_Lab_2
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(312, 66);
+            label5.Location = new Point(430, 66);
             label5.Name = "label5";
             label5.Size = new Size(174, 20);
             label5.TabIndex = 13;
@@ -263,7 +264,7 @@ namespace Hospital_System_Lab_2
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(313, 97);
+            label6.Location = new Point(430, 96);
             label6.Name = "label6";
             label6.Size = new Size(43, 20);
             label6.TabIndex = 14;
@@ -272,7 +273,7 @@ namespace Hospital_System_Lab_2
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(459, 97);
+            label7.Location = new Point(567, 95);
             label7.Name = "label7";
             label7.Size = new Size(25, 20);
             label7.TabIndex = 15;
@@ -281,7 +282,7 @@ namespace Hospital_System_Lab_2
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(438, 134);
+            label8.Location = new Point(546, 132);
             label8.Name = "label8";
             label8.Size = new Size(15, 20);
             label8.TabIndex = 16;
@@ -289,23 +290,23 @@ namespace Hospital_System_Lab_2
             // 
             // durationFromTextBox
             // 
-            durationFromTextBox.Location = new Point(313, 120);
+            durationFromTextBox.Location = new Point(430, 118);
             durationFromTextBox.Multiline = true;
             durationFromTextBox.Name = "durationFromTextBox";
-            durationFromTextBox.Size = new Size(110, 49);
+            durationFromTextBox.Size = new Size(110, 39);
             durationFromTextBox.TabIndex = 17;
             // 
             // durationToTextBox
             // 
-            durationToTextBox.Location = new Point(459, 120);
+            durationToTextBox.Location = new Point(567, 118);
             durationToTextBox.Multiline = true;
             durationToTextBox.Name = "durationToTextBox";
-            durationToTextBox.Size = new Size(125, 48);
+            durationToTextBox.Size = new Size(125, 39);
             durationToTextBox.TabIndex = 18;
             // 
             // textBox7
             // 
-            textBox7.Location = new Point(1120, 477);
+            textBox7.Location = new Point(822, 520);
             textBox7.Multiline = true;
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(233, 66);
@@ -314,7 +315,7 @@ namespace Hospital_System_Lab_2
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(1120, 454);
+            label9.Location = new Point(822, 497);
             label9.Name = "label9";
             label9.Size = new Size(174, 20);
             label9.TabIndex = 20;
@@ -323,7 +324,7 @@ namespace Hospital_System_Lab_2
             // filterButton
             // 
             filterButton.BackColor = SystemColors.ActiveCaption;
-            filterButton.Location = new Point(604, 120);
+            filterButton.Location = new Point(430, 159);
             filterButton.Name = "filterButton";
             filterButton.Size = new Size(73, 48);
             filterButton.TabIndex = 21;
@@ -352,7 +353,7 @@ namespace Hospital_System_Lab_2
             // sortBtn
             // 
             sortBtn.BackColor = SystemColors.ActiveCaption;
-            sortBtn.Location = new Point(708, 120);
+            sortBtn.Location = new Point(624, 160);
             sortBtn.Name = "sortBtn";
             sortBtn.Size = new Size(68, 46);
             sortBtn.TabIndex = 23;
@@ -363,7 +364,7 @@ namespace Hospital_System_Lab_2
             // prevBtn
             // 
             prevBtn.BackColor = SystemColors.ActiveCaption;
-            prevBtn.Location = new Point(54, 184);
+            prevBtn.Location = new Point(23, 165);
             prevBtn.Name = "prevBtn";
             prevBtn.Size = new Size(69, 36);
             prevBtn.TabIndex = 24;
@@ -374,7 +375,7 @@ namespace Hospital_System_Lab_2
             // nextBtn
             // 
             nextBtn.BackColor = SystemColors.ActiveCaption;
-            nextBtn.Location = new Point(168, 184);
+            nextBtn.Location = new Point(137, 165);
             nextBtn.Name = "nextBtn";
             nextBtn.Size = new Size(71, 36);
             nextBtn.TabIndex = 25;
@@ -384,7 +385,7 @@ namespace Hospital_System_Lab_2
             // 
             // pageNumTextBox
             // 
-            pageNumTextBox.Location = new Point(129, 189);
+            pageNumTextBox.Location = new Point(98, 170);
             pageNumTextBox.Name = "pageNumTextBox";
             pageNumTextBox.ReadOnly = true;
             pageNumTextBox.Size = new Size(33, 27);
@@ -393,9 +394,21 @@ namespace Hospital_System_Lab_2
             pageNumTextBox.TextAlign = HorizontalAlignment.Center;
             pageNumTextBox.TextChanged += textBox5_TextChanged;
             // 
+            // btnToStaff
+            // 
+            btnToStaff.BackColor = SystemColors.ActiveCaption;
+            btnToStaff.Location = new Point(1179, 520);
+            btnToStaff.Name = "btnToStaff";
+            btnToStaff.Size = new Size(117, 59);
+            btnToStaff.TabIndex = 27;
+            btnToStaff.Text = "Go to staff";
+            btnToStaff.UseVisualStyleBackColor = false;
+            btnToStaff.Click += button1_Click;
+            // 
             // MainForm
             // 
             ClientSize = new Size(1396, 761);
+            Controls.Add(btnToStaff);
             Controls.Add(pageNumTextBox);
             Controls.Add(nextBtn);
             Controls.Add(prevBtn);
@@ -524,52 +537,52 @@ namespace Hospital_System_Lab_2
         private Label label4;
 
 
-        private void SearchButtonClick(object sender, EventArgs e)
-        {
-            try
-            {
-                if (!dataManager.Entities.Any())
-                {
-                    return;
-                }
+        //private void SearchButtonClick(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (!dataManager.Entities.Any())
+        //        {
+        //            return;
+        //        }
 
-                MainListView.Items.Clear();
+        //        MainListView.Items.Clear();
 
-                IEnumerable<IEntity> foundEntities = new List<IEntity>();
-                if (string.IsNullOrEmpty(SearchListView.Text))
-                {
-                    foundEntities = dataManager.Entities;
-                }
-                else
-                {
-                    foundEntities = dataManager.Search(SearchListView.Text);
-                }
+        //        IEnumerable<IEntity> foundEntities = new List<IEntity>();
+        //        if (string.IsNullOrEmpty(SearchListView.Text))
+        //        {
+        //            foundEntities = dataManager.Entities;
+        //        }
+        //        else
+        //        {
+        //            foundEntities = dataManager.Search(SearchListView.Text);
+        //        }
 
-                foreach (IEntity entity in foundEntities)
-                {
+        //        foreach (IEntity entity in foundEntities)
+        //        {
 
-                    var hospitalEntity = entity as Hospital;
+        //            var hospitalEntity = entity as Hospital;
 
-                    if (hospitalEntity != null)
-                    {
-                        var item = new ListViewItem(MainListView.Items.Count + 1 + "");
-                        item.SubItems.Add(hospitalEntity.Name);
-                        item.SubItems.Add(hospitalEntity.Description);
-                        item.SubItems.Add(hospitalEntity.Address);
-                        item.SubItems.Add(textBox7.Text);
-                        item.SubItems.Add("0");
-                        item.SubItems.Add("0");
-                        item.SubItems.Add("0");
+        //            if (hospitalEntity != null)
+        //            {
+        //                var item = new ListViewItem(MainListView.Items.Count + 1 + "");
+        //                item.SubItems.Add(hospitalEntity.Name);
+        //                item.SubItems.Add(hospitalEntity.Description);
+        //                item.SubItems.Add(hospitalEntity.Address);
+        //                item.SubItems.Add(textBox7.Text);
+        //                item.SubItems.Add("0");
+        //                item.SubItems.Add("0");
+        //                item.SubItems.Add("0");
 
-                        MainListView.Items.Add(item);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+        //                MainListView.Items.Add(item);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //}
         private Label label5;
         private Label label6;
         private Label label7;
@@ -587,6 +600,7 @@ namespace Hospital_System_Lab_2
         {
             try
             {
+
                 if (!dataManager.Entities.Any())
                 {
                     return;
@@ -648,26 +662,26 @@ namespace Hospital_System_Lab_2
 
 
         //filter
-        private bool FilterHospitalByDurationOfWork(IEntity entity)
-        {
-            TimeSpan? durationFrom = null;
-            if (TimeSpan.TryParse(durationFromTextBox.Text, out var durationFromResult))
-                durationFrom = durationFromResult;
+        //private bool FilterHospitalByDurationOfWork(IEntity entity)
+        //{
+        //    TimeSpan? durationFrom = null;
+        //    if (TimeSpan.TryParse(durationFromTextBox.Text, out var durationFromResult))
+        //        durationFrom = durationFromResult;
 
-            TimeSpan? durationTo = null;
-            if (TimeSpan.TryParse(durationToTextBox.Text, out var durationToResult))
-                durationTo = durationToResult;
+        //    TimeSpan? durationTo = null;
+        //    if (TimeSpan.TryParse(durationToTextBox.Text, out var durationToResult))
+        //        durationTo = durationToResult;
 
-            var hospital = entity as Hospital;
-            if (hospital != null && hospital.DurationOfWork != null && durationFrom != null && durationTo != null)
-            {
-                return hospital.DurationOfWork >= durationFrom && hospital.DurationOfWork <= durationTo;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        //    var hospital = entity as Hospital;
+        //    if (hospital != null && hospital.DurationOfWork != null && durationFrom != null && durationTo != null)
+        //    {
+        //        return hospital.DurationOfWork >= durationFrom && hospital.DurationOfWork <= durationTo;
+        //    }
+        //    else
+        //    {
+        //        return false;
+        //    }
+        //}
         private StatusStrip statusStrip1;
 
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -792,6 +806,12 @@ namespace Hospital_System_Lab_2
                 currentPage++;
                 Paginate();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var fillingInPersonnelInformation = new FillingInPersonnelInformation();
+            fillingInPersonnelInformation.Show();
         }
     }
 }
